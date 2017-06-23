@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE ApplicationModule>
+<ns:ApplicationModule xmlns:ns="http://colorcoding.org/ibas/initialfantasy/bo">
+	<Activated>YES</Activated>
+	<ModuleEntry>index.users</ModuleEntry>
+	<ModuleId>4d8b5b7d-b1ae-418b-abc8-67d70ae8c36e</ModuleId>
+	<ModuleName>BusinessOneUsers</ModuleName>
+	<PlatformId>COMBINATION</PlatformId>
+</ns:ApplicationModule>

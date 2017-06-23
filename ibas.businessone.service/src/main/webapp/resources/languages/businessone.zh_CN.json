@@ -1,0 +1,20 @@
+{
+  "businessone": "B1",
+  "businessone_icon": "sap-icon://business-one",
+  "businessone_func_company": "公司",
+  "businessone_app_company_list": "公司列表",
+  "businessone_app_company_choose": "公司选择",
+  "businessone_app_company_view": "公司查看",
+  "businessone_app_company_edit": "公司编辑",
+  "businessone_func_user": "用户",
+  "businessone_app_user_list": "用户列表",
+  "businessone_app_user_choose": "用户选择",
+  "businessone_app_user_view": "用户查看",
+  "businessone_app_user_edit": "用户编辑",
+  "businessone_basis_information": "基本信息",
+  "businessone_other_information": "其他信息",
+  "businessone_server_information": "服务器信息",
+  "businessoneusers": "我的B1",
+  "businessoneusers_icon": "sap-icon://crm-sales",
+  "businessone_closing_delimiter": "----结束----"
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "Id": "${ProjectId}",
+    "Name": "BusinessOne",
+    "Category": "",
+    "Address": ".../",
+    "Repository": "http://localhost:8080/businessone/services/rest/data"
+  }
+]
