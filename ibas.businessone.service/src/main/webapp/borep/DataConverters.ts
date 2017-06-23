@@ -8,6 +8,7 @@
 
 import * as ibas from "ibas/index";
 import * as bo from "./bo/index";
+import * as ibas4j from "./DataDeclarations.d";
 import {
 } from "../api/index";
 
@@ -17,6 +18,44 @@ export class DataConverter4b1 extends ibas.DataConverter4j {
     /** 创建业务对象转换者 */
     protected createConverter(): ibas.BOConverter {
         return new BOConverter4b1;
+    }
+    /**
+     * 转换业务对象数据
+     * @param data 本地类型
+     * @param sign 特殊标记
+     * @returns 目标类型
+     */
+    convert(data: any, sign: string): any {
+        if (ibas.objects.instanceOf(data, bo.UserCompany)) {
+            let newData: bo.UserCompany = data;
+            let remote: ibas4j.UserCompany = {
+                type: data.constructor.name,
+                User: newData.user,
+                Company: newData.company,
+                Url: newData.url,
+            };
+            return remote;
+        } else {
+            return super.convert(data, sign);
+        }
+    }
+    /**
+     * 解析业务对象数据
+     * @param data 目标类型
+     * @param sign 特殊标记
+     * @returns 本地类型
+     */
+    parsing(data: any, sign: string): any {
+        if (data.type === bo.UserCompany.name) {
+            let remote: ibas4j.UserCompany = data;
+            let newData: bo.UserCompany = new bo.UserCompany();
+            newData.user = remote.User;
+            newData.company  = remote.Company;
+            newData.url = remote.Url;
+            return newData;
+        } else {
+            return super.parsing(data, sign);
+        }
     }
 }
 

@@ -7,7 +7,7 @@
  */
 
 import * as ibas from "ibas/index";
-import { CompanyFunc, CompanyChooseServiceMapping, CompanyLinkServiceMapping } from "./company/index";
+import { CompanyFunc, CompanyChooseServiceMapping } from "./company/index";
 import { UserFunc, UserChooseServiceMapping, UserLinkServiceMapping } from "./user/index";
 import { UserCompanyFunc } from "./users/index";
 import * as bo from "../borep/bo/index";
@@ -37,9 +37,7 @@ export class Console extends ibas.ModuleConsole {
         this.register(new UserFunc());
         // 注册服务应用
         this.register(new CompanyChooseServiceMapping());
-        this.register(new CompanyLinkServiceMapping());
         this.register(new UserChooseServiceMapping());
-        this.register(new UserLinkServiceMapping());
         // 注册常驻应用
 
     }

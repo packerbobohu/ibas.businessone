@@ -70,7 +70,8 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			for (ICompany item : opRsltCompany.getResultObjects()) {
 				UserCompany userCompany = new UserCompany();
 				userCompany.setUser(user);
-				userCompany.setCompany(item.getName());
+				userCompany.setCompany(item.getDescription() != null && !item.getDescription().isEmpty()
+						? item.getDescription() : item.getName());
 				userCompany.setUrl(item.getAddress());
 				opRslt.addResultObjects(userCompany);
 			}

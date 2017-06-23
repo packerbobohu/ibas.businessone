@@ -19,6 +19,7 @@ import {
     BODocumentLine,
     BOSimple,
     BOSimpleLine,
+    config,
 } from "ibas/index";
 import {
     IUser,
@@ -269,7 +270,7 @@ export class User extends BOSimple<User> implements IUser {
 
     /** 初始化数据 */
     protected init(): void {
-        this.objectCode = User.BUSINESS_OBJECT_CODE;
+        this.objectCode = config.applyVariables(User.BUSINESS_OBJECT_CODE);
     }
 }
 

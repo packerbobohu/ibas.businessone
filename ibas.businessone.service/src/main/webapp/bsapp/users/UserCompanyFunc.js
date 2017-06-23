@@ -12,9 +12,10 @@ define(["require", "exports", "ibas/index", "../company/index"], function (requi
         default() {
             let app = new index_1.CompanyViewApp();
             app.navigation = this.navigation;
+            app.url = this.company.url;
             return app;
         }
     }
-    UserCompanyFunc.FUNCTION_ID_PREFIX = "3563a3f7-4062-4aab-b456-";
+    UserCompanyFunc.FUNCTION_ID_PREFIX = "64d02c6e-e9ae-4556-9d94-";
     exports.UserCompanyFunc = UserCompanyFunc;
 });

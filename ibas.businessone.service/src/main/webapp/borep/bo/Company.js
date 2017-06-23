@@ -144,7 +144,7 @@ define(["require", "exports", "ibas/index", "../../api/index"], function (requir
             this.setProperty(Company.PROPERTY_ORGANIZATION_NAME, value);
         }
         init() {
-            this.objectCode = Company.BUSINESS_OBJECT_CODE;
+            this.objectCode = index_1.config.applyVariables(Company.BUSINESS_OBJECT_CODE);
         }
     }
     Company.BUSINESS_OBJECT_CODE = index_2.BO_CODE_COMPANY;

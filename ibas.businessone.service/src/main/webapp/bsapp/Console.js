@@ -14,9 +14,7 @@ define(["require", "exports", "ibas/index", "./company/index", "./user/index", "
             this.register(new index_1.CompanyFunc());
             this.register(new index_2.UserFunc());
             this.register(new index_1.CompanyChooseServiceMapping());
-            this.register(new index_1.CompanyLinkServiceMapping());
             this.register(new index_2.UserChooseServiceMapping());
-            this.register(new index_2.UserLinkServiceMapping());
         }
         run() {
             ibas.i18n.load(this.rootUrl + "resources/languages/businessone.json");

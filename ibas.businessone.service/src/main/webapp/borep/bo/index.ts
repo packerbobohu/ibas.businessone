@@ -17,3 +17,5 @@ import { Company } from "./Company";
 ibas.boFactory.register(Company.BUSINESS_OBJECT_CODE, Company);
 import { User } from "./User";
 ibas.boFactory.register(User.BUSINESS_OBJECT_CODE, User);
+import { UserCompany } from "./UserCompany";
+ibas.boFactory.register(UserCompany);

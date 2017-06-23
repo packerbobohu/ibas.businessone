@@ -14,65 +14,15 @@ import { ICompanyViewView } from "../../../bsapp/company/index";
 /**
  * 查看视图-公司
  */
-export class CompanyViewView extends ibas.BOViewView implements ICompanyViewView {
+export class CompanyViewView extends ibas.UrlView implements ICompanyViewView {
 
+    constructor() {
+        super();
+        this.isInside = true;
+    }
     /** 绘制视图 */
     darw(): any {
-        let that: this = this;
-        this.form = new sap.ui.layout.form.SimpleForm("", {
-            content: [
-            ]
-        });
-        this.page = new sap.m.Page("", {
-            showHeader: false,
-            subHeader: new sap.m.Bar("", {
-                contentLeft: [
-                    new sap.m.Button("", {
-                        text: ibas.i18n.prop("sys_shell_data_edit"),
-                        type: sap.m.ButtonType.Transparent,
-                        icon: "sap-icon://edit",
-                        press: function (): void {
-                            that.fireViewEvents(that.editDataEvent);
-                        }
-                    })
-                ],
-                contentRight: [
-                    new sap.m.Button("", {
-                        type: sap.m.ButtonType.Transparent,
-                        icon: "sap-icon://action",
-                        press: function (event: any): void {
-                            that.fireViewEvents(that.callServicesEvent, {
-                                displayServices(services: ibas.IServiceAgent[]): void {
-                                    if (ibas.objects.isNull(services) || services.length === 0) {
-                                        return;
-                                    }
-                                    let popover: sap.m.Popover = new sap.m.Popover("", {
-                                        showHeader: false,
-                                        placement: sap.m.PlacementType.Bottom,
-                                    });
-                                    for (let service of services) {
-                                        popover.addContent(new sap.m.Button({
-                                            text: ibas.i18n.prop(service.name),
-                                            type: sap.m.ButtonType.Transparent,
-                                            icon: service.icon,
-                                            press: function (): void {
-                                                service.run();
-                                                popover.close();
-                                            }
-                                        }));
-                                    }
-                                    (<any>popover).addStyleClass("sapMOTAPopover sapTntToolHeaderPopover");
-                                    popover.openBy(event.getSource(), true);
-                                }
-                            });
-                        }
-                    })
-                ]
-            }),
-            content: [this.form]
-        });
-        this.id = this.page.getId();
-        return this.page;
+        return undefined;
     }
     private page: sap.m.Page;
     private form: sap.ui.layout.form.SimpleForm;

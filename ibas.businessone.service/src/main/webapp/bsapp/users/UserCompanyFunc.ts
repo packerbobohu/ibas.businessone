@@ -16,7 +16,7 @@ import { CompanyViewApp } from "../company/index";
 export class UserCompanyFunc extends ibas.ModuleFunction {
 
     /** 功能标识 */
-    static FUNCTION_ID_PREFIX = "3563a3f7-4062-4aab-b456-";
+    static FUNCTION_ID_PREFIX = "64d02c6e-e9ae-4556-9d94-";
     /** 构造函数 */
     constructor(company: bo.UserCompany) {
         super();
@@ -30,6 +30,7 @@ export class UserCompanyFunc extends ibas.ModuleFunction {
     default(): ibas.IApplication<ibas.IView> {
         let app: CompanyViewApp = new CompanyViewApp();
         app.navigation = this.navigation;
+        app.url = this.company.url;
         return app;
     }
 }
