@@ -8,7 +8,7 @@
 
 import * as ibas from "ibas/index";
 import * as bo from "./bo/index";
-import { IBORepositoryBusinessOne, BO_REPOSITORY_BUSINESSONE, UserMethodsCaller } from "../api/index";
+import { IBORepositoryBusinessOne, BO_REPOSITORY_BUSINESSONE, KeyMethodsCaller } from "../api/index";
 import { DataConverter4b1 } from "./DataConverters";
 
 /** 业务对象仓库 */
@@ -27,17 +27,31 @@ export class BORepositoryBusinessOne extends ibas.BORepositoryApplication implem
         return boRepository;
     }
 	/**
-	 * 查询用户报表
+	 * 查询用户公司
 	 * @param listener 用户检索监听者
 	 */
-    fetchUserCompanies(caller: UserMethodsCaller<bo.UserCompany>): void {
+    fetchUserCompanies(caller: KeyMethodsCaller<ibas.KeyText>): void {
         let remoteRepository: ibas.IRemoteRepository = this.createRemoteRepository();
         if (ibas.objects.isNull(remoteRepository)) {
             throw new Error(ibas.i18n.prop("sys_invalid_parameter", "remoteRepository"));
         }
         let method: string =
             ibas.strings.format("fetchUserCompanies?user={0}&token={1}",
-                caller.user, this.token);
+                caller.key, this.token);
+        remoteRepository.callRemoteMethod(method, undefined, caller);
+    }
+	/**
+	 * 运行用户公司
+	 * @param listener 用户检索监听者
+	 */
+    runUserCompany(caller: KeyMethodsCaller<ibas.KeyText>): void {
+        let remoteRepository: ibas.IRemoteRepository = this.createRemoteRepository();
+        if (ibas.objects.isNull(remoteRepository)) {
+            throw new Error(ibas.i18n.prop("sys_invalid_parameter", "remoteRepository"));
+        }
+        let method: string =
+            ibas.strings.format("runUserCompany?company={0}&token={1}",
+                caller.key, this.token);
         remoteRepository.callRemoteMethod(method, undefined, caller);
     }
 

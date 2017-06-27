@@ -118,8 +118,8 @@ export class ConsoleUsers extends ibas.ModuleConsole {
             // 加载用户报表
             let boRepository: BORepositoryBusinessOne = new BORepositoryBusinessOne();
             boRepository.fetchUserCompanies({
-                user: ibas.variablesManager.getValue(ibas.VARIABLE_NAME_USER_CODE),
-                onCompleted(opRslt: ibas.IOperationResult<bo.UserCompany>): void {
+                key: ibas.variablesManager.getValue(ibas.VARIABLE_NAME_USER_CODE),
+                onCompleted(opRslt: ibas.IOperationResult<ibas.KeyText>): void {
                     if (opRslt.resultCode !== 0) {
                         ibas.logger.log(ibas.emMessageLevel.ERROR, opRslt.message);
                     }

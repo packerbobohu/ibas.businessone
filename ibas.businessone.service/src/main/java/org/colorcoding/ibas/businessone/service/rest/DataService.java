@@ -9,9 +9,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.colorcoding.ibas.bobas.common.Criteria;
 import org.colorcoding.ibas.bobas.common.OperationResult;
+import org.colorcoding.ibas.bobas.data.KeyText;
 import org.colorcoding.ibas.businessone.bo.company.Company;
 import org.colorcoding.ibas.businessone.bo.user.User;
-import org.colorcoding.ibas.businessone.bo.users.UserCompany;
 import org.colorcoding.ibas.businessone.repository.BORepositoryBusinessOne;
 
 /**
@@ -34,9 +34,27 @@ public class DataService extends BORepositoryBusinessOne {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("fetchUserCompanies")
-	public OperationResult<UserCompany> fetchUserCompanies(@QueryParam("user") String user,
+	public OperationResult<KeyText> fetchUserCompanies(@QueryParam("user") String user,
 			@QueryParam("token") String token) {
 		return super.fetchUserCompanies(user, token);
+	}
+
+	/**
+	 * 运行-用户公司
+	 * 
+	 * @param company
+	 *            公司
+	 * @param token
+	 *            口令
+	 * @return 操作结果
+	 */
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("runUserCompany")
+	public OperationResult<KeyText> runUserCompany(@QueryParam("company") String company,
+			@QueryParam("token") String token) {
+		return super.runUserCompany(company, token);
 	}
 
 	// --------------------------------------------------------------------------------------------//

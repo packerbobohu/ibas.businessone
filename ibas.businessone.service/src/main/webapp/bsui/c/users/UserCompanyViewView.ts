@@ -9,15 +9,16 @@
 import * as ibas from "ibas/index";
 import { utils } from "openui5/typings/ibas.utils";
 import * as bo from "../../../borep/bo/index";
-import { ICompanyViewView } from "../../../bsapp/company/index";
+import { IUserCompanyViewView } from "../../../bsapp/users/index";
 
 /**
- * 查看视图-公司
+ * 用户公司查看
  */
-export class CompanyViewView extends ibas.UrlView implements ICompanyViewView {
+export class UserCompanyViewView extends ibas.UrlView implements IUserCompanyViewView {
 
     /** 绘制视图 */
     darw(): any {
         return undefined;
     }
+
 }

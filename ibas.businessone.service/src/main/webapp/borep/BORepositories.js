@@ -17,7 +17,15 @@ define(["require", "exports", "ibas/index", "./bo/index", "../api/index", "./Dat
             if (ibas.objects.isNull(remoteRepository)) {
                 throw new Error(ibas.i18n.prop("sys_invalid_parameter", "remoteRepository"));
             }
-            let method = ibas.strings.format("fetchUserCompanies?user={0}&token={1}", caller.user, this.token);
+            let method = ibas.strings.format("fetchUserCompanies?user={0}&token={1}", caller.key, this.token);
+            remoteRepository.callRemoteMethod(method, undefined, caller);
+        }
+        runUserCompany(caller) {
+            let remoteRepository = this.createRemoteRepository();
+            if (ibas.objects.isNull(remoteRepository)) {
+                throw new Error(ibas.i18n.prop("sys_invalid_parameter", "remoteRepository"));
+            }
+            let method = ibas.strings.format("runUserCompany?company={0}&token={1}", caller.key, this.token);
             remoteRepository.callRemoteMethod(method, undefined, caller);
         }
         fetchCompany(fetcher) {

@@ -2,10 +2,10 @@ package org.colorcoding.ibas.businessone.repository;
 
 import org.colorcoding.ibas.bobas.common.ICriteria;
 import org.colorcoding.ibas.bobas.common.IOperationResult;
+import org.colorcoding.ibas.bobas.data.KeyText;
 import org.colorcoding.ibas.bobas.repository.IBORepositoryApplication;
 import org.colorcoding.ibas.businessone.bo.company.ICompany;
 import org.colorcoding.ibas.businessone.bo.user.IUser;
-import org.colorcoding.ibas.businessone.bo.users.UserCompany;
 
 /**
  * BusinessOne仓库应用
@@ -19,7 +19,16 @@ public interface IBORepositoryBusinessOneApp extends IBORepositoryApplication {
 	 *            用户
 	 * @return 操作结果
 	 */
-	IOperationResult<UserCompany> fetchUserCompanies(String user);
+	IOperationResult<KeyText> fetchUserCompanies(String user);
+
+	/**
+	 * 运行-用户公司
+	 * 
+	 * @param company
+	 *            公司
+	 * @return 操作结果
+	 */
+	IOperationResult<KeyText> runUserCompany(String company);
 
 	// --------------------------------------------------------------------------------------------//
 	/**

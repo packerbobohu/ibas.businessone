@@ -65,14 +65,6 @@ define(["require", "exports", "ibas/index", "openui5/typings/ibas.utils", "../..
                             }
                         }),
                         new sap.m.Button("", {
-                            text: ibas.i18n.prop("sys_shell_data_view"),
-                            type: sap.m.ButtonType.Transparent,
-                            icon: "sap-icon://display",
-                            press: function () {
-                                that.fireViewEvents(that.viewDataEvent, ibas_utils_1.utils.getTableSelecteds(that.table).firstOrDefault());
-                            }
-                        }),
-                        new sap.m.Button("", {
                             text: ibas.i18n.prop("sys_shell_data_edit"),
                             type: sap.m.ButtonType.Transparent,
                             icon: "sap-icon://edit",

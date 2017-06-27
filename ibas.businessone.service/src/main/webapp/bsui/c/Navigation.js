@@ -1,4 +1,4 @@
-define(["require", "exports", "ibas/index", "../../bsapp/company/index", "../../bsapp/user/index", "./company/index", "./user/index"], function (require, exports, ibas, companyApps, userApps, companyViews, userViews) {
+define(["require", "exports", "ibas/index", "../../bsapp/company/index", "../../bsapp/user/index", "../../bsapp/users/index", "./company/index", "./user/index", "./users/index"], function (require, exports, ibas, companyApps, userApps, usersApps, companyViews, userViews, usersViews) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Navigation extends ibas.ViewNavigation {
@@ -28,6 +28,9 @@ define(["require", "exports", "ibas/index", "../../bsapp/company/index", "../../
                     break;
                 case userApps.UserEditApp.APPLICATION_ID:
                     view = new userViews.UserEditView();
+                    break;
+                case usersApps.UserCompanyViewApp.APPLICATION_ID:
+                    view = new usersViews.UserCompanyViewView();
                     break;
                 default:
                     break;

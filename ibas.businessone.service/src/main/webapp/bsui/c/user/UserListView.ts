@@ -91,6 +91,7 @@ export class UserListView extends ibas.BOListView implements IUserListView {
                             that.fireViewEvents(that.newDataEvent);
                         }
                     }),
+                    /*
                     new sap.m.Button("", {
                         text: ibas.i18n.prop("sys_shell_data_view"),
                         type: sap.m.ButtonType.Transparent,
@@ -102,6 +103,7 @@ export class UserListView extends ibas.BOListView implements IUserListView {
                             );
                         }
                     }),
+                    */
                     new sap.m.Button("", {
                         text: ibas.i18n.prop("sys_shell_data_edit"),
                         type: sap.m.ButtonType.Transparent,

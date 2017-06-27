@@ -26,20 +26,6 @@ define(["require", "exports", "ibas/index", "openui5/typings/ibas.utils"], funct
                         path: "/activated",
                         type: "sap.ui.model.type.Integer"
                     }),
-                    new sap.m.Label("", { text: ibas.i18n.prop("bo_company_server") }),
-                    new sap.m.Input("", {}).bindProperty("value", {
-                        path: "/server"
-                    }),
-                    new sap.m.Label("", { text: ibas.i18n.prop("bo_company_user") }),
-                    new sap.m.Input("", {}).bindProperty("value", {
-                        path: "/user"
-                    }),
-                    new sap.m.Label("", { text: ibas.i18n.prop("bo_company_password") }),
-                    new sap.m.Input("", {
-                        type: sap.m.InputType.Password
-                    }).bindProperty("value", {
-                        path: "/password"
-                    }),
                     new sap.m.Label("", { text: ibas.i18n.prop("bo_company_address") }),
                     new sap.m.Input("", {}).bindProperty("value", {
                         path: "/address"

@@ -45,7 +45,7 @@ export class CompanyViewApp extends ibas.Application<ICompanyViewView> {
     get url(): string {
         return this.view.url;
     }
-    set url(value) {
+    set url(value: string) {
         this.view.url = value;
     }
 }

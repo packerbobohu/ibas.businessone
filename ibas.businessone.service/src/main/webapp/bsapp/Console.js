@@ -71,7 +71,7 @@ define(["require", "exports", "ibas/index", "./company/index", "./user/index", "
                 that._navigation = new ui.default();
                 let boRepository = new BORepositories_1.BORepositoryBusinessOne();
                 boRepository.fetchUserCompanies({
-                    user: ibas.variablesManager.getValue(ibas.VARIABLE_NAME_USER_CODE),
+                    key: ibas.variablesManager.getValue(ibas.VARIABLE_NAME_USER_CODE),
                     onCompleted(opRslt) {
                         if (opRslt.resultCode !== 0) {
                             ibas.logger.log(ibas.emMessageLevel.ERROR, opRslt.message);

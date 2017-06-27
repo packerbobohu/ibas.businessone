@@ -5,14 +5,16 @@ import org.colorcoding.ibas.bobas.common.ICondition;
 import org.colorcoding.ibas.bobas.common.ICriteria;
 import org.colorcoding.ibas.bobas.common.IOperationResult;
 import org.colorcoding.ibas.bobas.common.OperationResult;
+import org.colorcoding.ibas.bobas.data.KeyText;
 import org.colorcoding.ibas.bobas.data.emYesNo;
+import org.colorcoding.ibas.bobas.i18n.i18n;
 import org.colorcoding.ibas.bobas.ownership.PermissionGroup;
 import org.colorcoding.ibas.bobas.repository.BORepositoryServiceApplication;
 import org.colorcoding.ibas.businessone.bo.company.Company;
 import org.colorcoding.ibas.businessone.bo.company.ICompany;
 import org.colorcoding.ibas.businessone.bo.user.IUser;
 import org.colorcoding.ibas.businessone.bo.user.User;
-import org.colorcoding.ibas.businessone.bo.users.UserCompany;
+import org.colorcoding.ibas.initialfantasy.repository.BORepositoryInitialFantasy;
 
 /**
  * BusinessOne仓库
@@ -23,13 +25,13 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 
 	// --------------------------------------------------------------------------------------------//
 	@Override
-	public IOperationResult<UserCompany> fetchUserCompanies(String user) {
+	public IOperationResult<KeyText> fetchUserCompanies(String user) {
 		return this.fetchUserCompanies(user, this.getUserToken());
 	}
 
 	@Override
-	public OperationResult<UserCompany> fetchUserCompanies(String user, String token) {
-		OperationResult<UserCompany> opRslt = new OperationResult<UserCompany>();
+	public OperationResult<KeyText> fetchUserCompanies(String user, String token) {
+		OperationResult<KeyText> opRslt = new OperationResult<KeyText>();
 		try {
 			this.setUserToken(token);
 			ICriteria criteria = new Criteria();
@@ -68,13 +70,88 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 				throw new Exception(opRsltCompany.getMessage());
 			}
 			for (ICompany item : opRsltCompany.getResultObjects()) {
-				UserCompany userCompany = new UserCompany();
-				userCompany.setUser(user);
-				userCompany.setCompany(item.getDescription() != null && !item.getDescription().isEmpty()
+				KeyText keyText = new KeyText();
+				keyText.setKey(item.getName());
+				keyText.setText(item.getDescription() != null && !item.getDescription().isEmpty()
 						? item.getDescription() : item.getName());
-				userCompany.setUrl(item.getAddress());
-				opRslt.addResultObjects(userCompany);
+				opRslt.addResultObjects(keyText);
 			}
+		} catch (Exception e) {
+			opRslt.setError(e);
+		}
+		return opRslt;
+	}
+
+	@Override
+	public IOperationResult<KeyText> runUserCompany(String user) {
+		return this.runUserCompany(user, this.getUserToken());
+	}
+
+	@Override
+	public OperationResult<KeyText> runUserCompany(String company, String token) {
+		OperationResult<KeyText> opRslt = new OperationResult<KeyText>();
+		try {
+			this.setUserToken(token);
+			// 查询系统用户
+			ICriteria criteria = new Criteria();
+			ICondition condition = criteria.getConditions().create();
+			condition.setAlias(org.colorcoding.ibas.initialfantasy.bo.organizations.User.PROPERTY_DOCENTRY.getName());
+			condition.setValue(this.getCurrentUser().getId());
+			condition = criteria.getConditions().create();
+			condition.setAlias(org.colorcoding.ibas.initialfantasy.bo.organizations.User.PROPERTY_ACTIVATED.getName());
+			condition.setValue(emYesNo.YES);
+			BORepositoryInitialFantasy ifRepository = new BORepositoryInitialFantasy();
+			ifRepository.setRepository(this.getRepository());
+			IOperationResult<org.colorcoding.ibas.initialfantasy.bo.organizations.User> opRsltSysUser = ifRepository
+					.fetchUser(criteria, token);
+			if (opRsltSysUser.getError() != null) {
+				throw opRsltSysUser.getError();
+			}
+			org.colorcoding.ibas.initialfantasy.bo.organizations.User user = opRsltSysUser.getResultObjects()
+					.firstOrDefault();
+			if (user == null) {
+				throw new Exception(i18n.prop("msg_b1_system_user_not_exist"));
+			}
+			// 查询绑定用户
+			criteria = new Criteria();
+			condition = criteria.getConditions().create();
+			condition.setAlias(User.PROPERTY_USER.getName());
+			condition.setValue(user.getCode());
+			condition = criteria.getConditions().create();
+			condition.setAlias(User.PROPERTY_COMPANY.getName());
+			condition.setValue(company);
+			condition = criteria.getConditions().create();
+			condition.setAlias(User.PROPERTY_ACTIVATED.getName());
+			condition.setValue(emYesNo.YES);
+			IOperationResult<User> opRsltUser = this.fetchUser(criteria, token);
+			if (opRsltUser.getError() != null) {
+				throw opRsltUser.getError();
+			}
+			User userCompany = opRsltUser.getResultObjects().firstOrDefault();
+			if (userCompany == null) {
+				throw new Exception(i18n.prop("msg_b1_user_no_company_available",
+						user.getName() != null && !user.getName().isEmpty() ? user.getName() : user.getCode()));
+			}
+			// 获取公司信息
+			criteria = new Criteria();
+			condition = criteria.getConditions().create();
+			condition.setAlias(Company.PROPERTY_NAME.getName());
+			condition.setValue(userCompany.getCompany());
+			condition = criteria.getConditions().create();
+			condition.setAlias(Company.PROPERTY_ACTIVATED.getName());
+			condition.setValue(emYesNo.YES);
+			IOperationResult<Company> opRsltCompany = this.fetchCompany(criteria, token);
+			if (opRsltCompany.getError() != null) {
+				throw opRsltCompany.getError();
+			}
+			Company mCompany = opRsltCompany.getResultObjects().firstOrDefault();
+			if (mCompany == null) {
+				throw new Exception(i18n.prop("msg_b1_company_unavailable", userCompany.getCompany()));
+			}
+			KeyText keyText = new KeyText();
+			keyText.setKey(String.format("${%s}", Company.PROPERTY_ADDRESS.getName()));
+			keyText.setText(mCompany.getAddress());
+			opRslt.addResultObjects(keyText);
 		} catch (Exception e) {
 			opRslt.setError(e);
 		}

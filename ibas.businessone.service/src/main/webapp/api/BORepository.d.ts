@@ -40,13 +40,11 @@ export interface IBORepositoryBusinessOne {
     saveUser(saver: SaveCaller<bo.IUser>);
 }
 /**
- * 用户相关调用者
+ * 关键值相关调用者
  */
-export interface UserMethodsCaller<P> extends MethodCaller {
-    /** 用户 */
-    user: string;
-    /** 平台 */
-    platform?: string;
+export interface KeyMethodsCaller<P> extends MethodCaller {
+    /** 关键值 */
+    key: string;
     /**
      * 调用完成
      * @param opRslt 结果

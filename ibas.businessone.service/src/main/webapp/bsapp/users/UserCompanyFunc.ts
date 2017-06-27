@@ -7,8 +7,7 @@
  */
 
 import * as ibas from "ibas/index";
-import * as bo from "../../borep/bo/index";
-import { CompanyViewApp } from "../company/index";
+import { UserCompanyViewApp } from "./UserCompanyViewApp";
 
 /**
  * 用户公司功能
@@ -18,19 +17,20 @@ export class UserCompanyFunc extends ibas.ModuleFunction {
     /** 功能标识 */
     static FUNCTION_ID_PREFIX = "64d02c6e-e9ae-4556-9d94-";
     /** 构造函数 */
-    constructor(company: bo.UserCompany) {
+    constructor(company: ibas.KeyText) {
         super();
         this.company = company;
-        this.id = UserCompanyFunc.FUNCTION_ID_PREFIX + ibas.strings.fill(company.company, 12, "0");
-        this.name = company.company;
-        this.description = company.company;
+        this.id = UserCompanyFunc.FUNCTION_ID_PREFIX + ibas.strings.fill(company.key, 12, "0");
+        this.name = company.key;
+        this.description = company.text;
     }
-    private company: bo.UserCompany;
+    private company: ibas.KeyText;
     /** 默认功能 */
     default(): ibas.IApplication<ibas.IView> {
-        let app: CompanyViewApp = new CompanyViewApp();
+        let app: UserCompanyViewApp = new UserCompanyViewApp();
         app.navigation = this.navigation;
-        app.url = this.company.url;
+        app.company = this.company.key;
+        app.description = this.company.text;
         return app;
     }
 }

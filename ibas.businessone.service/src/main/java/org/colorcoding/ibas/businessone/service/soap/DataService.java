@@ -7,9 +7,9 @@ import javax.jws.WebService;
 import org.colorcoding.ibas.bobas.common.Criteria;
 import org.colorcoding.ibas.bobas.common.OperationResult;
 import org.colorcoding.ibas.bobas.cxf.WebServicePath;
+import org.colorcoding.ibas.bobas.data.KeyText;
 import org.colorcoding.ibas.businessone.bo.company.Company;
 import org.colorcoding.ibas.businessone.bo.user.User;
-import org.colorcoding.ibas.businessone.bo.users.UserCompany;
 import org.colorcoding.ibas.businessone.repository.BORepositoryBusinessOne;
 
 /**
@@ -30,9 +30,24 @@ public class DataService extends BORepositoryBusinessOne {
 	 * @return 操作结果
 	 */
 	@WebMethod
-	public OperationResult<UserCompany> fetchUserCompanies(@WebParam(name = "user") String user,
+	public OperationResult<KeyText> fetchUserCompanies(@WebParam(name = "user") String user,
 			@WebParam(name = "token") String token) {
 		return super.fetchUserCompanies(user, token);
+	}
+
+	/**
+	 * 运行-用户公司
+	 * 
+	 * @param company
+	 *            公司
+	 * @param token
+	 *            口令
+	 * @return 操作结果
+	 */
+	@WebMethod
+	public OperationResult<KeyText> runUserCompany(@WebParam(name = "company") String company,
+			@WebParam(name = "token") String token) {
+		return super.runUserCompany(company, token);
 	}
 
 	// --------------------------------------------------------------------------------------------//
