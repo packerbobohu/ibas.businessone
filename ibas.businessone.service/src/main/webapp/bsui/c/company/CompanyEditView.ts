@@ -45,12 +45,12 @@ export class CompanyEditView extends ibas.BOEditView implements ICompanyEditView
                     path: "/activated",
                     type: "sap.ui.model.type.Integer"
                 }),
-                /*
                 new sap.m.Label("", { text: ibas.i18n.prop("bo_company_server") }),
                 new sap.m.Input("", {
                 }).bindProperty("value", {
                     path: "/server"
                 }),
+                /*
                 new sap.m.Label("", { text: ibas.i18n.prop("bo_company_user") }),
                 new sap.m.Input("", {
                 }).bindProperty("value", {

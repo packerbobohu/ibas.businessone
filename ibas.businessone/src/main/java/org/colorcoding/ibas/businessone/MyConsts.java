@@ -29,5 +29,8 @@ public final class MyConsts {
 	 * 服务命名空间
 	 */
 	public static final String NAMESPACE_SERVICE = NAMESPACE_ROOT + "service";
-
+	/**
+	 * 变量名称，公司地址
+	 */
+	public static final String PARAMETER_NAME_COMPANY_URL = "${Url}";
 }

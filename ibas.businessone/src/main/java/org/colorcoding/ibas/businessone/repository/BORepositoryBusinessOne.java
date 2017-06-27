@@ -10,10 +10,12 @@ import org.colorcoding.ibas.bobas.data.emYesNo;
 import org.colorcoding.ibas.bobas.i18n.i18n;
 import org.colorcoding.ibas.bobas.ownership.PermissionGroup;
 import org.colorcoding.ibas.bobas.repository.BORepositoryServiceApplication;
+import org.colorcoding.ibas.businessone.MyConsts;
 import org.colorcoding.ibas.businessone.bo.company.Company;
 import org.colorcoding.ibas.businessone.bo.company.ICompany;
 import org.colorcoding.ibas.businessone.bo.user.IUser;
 import org.colorcoding.ibas.businessone.bo.user.User;
+import org.colorcoding.ibas.businessone.util.Encrypt;
 import org.colorcoding.ibas.initialfantasy.repository.BORepositoryInitialFantasy;
 
 /**
@@ -148,10 +150,28 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			if (mCompany == null) {
 				throw new Exception(i18n.prop("msg_b1_company_unavailable", userCompany.getCompany()));
 			}
-			KeyText keyText = new KeyText();
-			keyText.setKey(String.format("${%s}", Company.PROPERTY_ADDRESS.getName()));
-			keyText.setText(mCompany.getAddress());
-			opRslt.addResultObjects(keyText);
+			Encrypt encrypt = new Encrypt();
+			String key = encrypt.random(32);
+			StringBuilder address = new StringBuilder();
+			// 服务地址
+			address.append(mCompany.getServer());
+			address.append("?");
+			// 账号
+			address.append("a1=");
+			address.append(encrypt.encrypt(userCompany.getMappedUser(), key));
+			// 密码
+			address.append("&");
+			address.append("c3=");
+			address.append(encrypt.encrypt(userCompany.getPassword(), key));
+			// 客户端地址
+			address.append("&");
+			address.append("d4=");
+			address.append(encrypt.encrypt(mCompany.getAddress(), key));
+			// 钥匙
+			address.append("&");
+			address.append("pa=");
+			address.append(key);
+			opRslt.addResultObjects(new KeyText(MyConsts.PARAMETER_NAME_COMPANY_URL, address.toString()));
 		} catch (Exception e) {
 			opRslt.setError(e);
 		}

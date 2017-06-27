@@ -10,7 +10,7 @@ import * as ibas from "ibas/index";
 import * as bo from "../../borep/bo/index";
 import { BORepositoryBusinessOne } from "../../borep/BORepositories";
 
-export const PARAMETER_NAME_COMPANY_ADDRESS: string = "${Address}";
+export const PARAMETER_NAME_COMPANY_URL: string = "${Url}";
 export const CONFIG_ITEM_B1_OPEN_INSIDE: string = "b1OpenInside";
 /** 应用-查看用户公司 */
 export class UserCompanyViewApp extends ibas.Application<IUserCompanyViewView> {
