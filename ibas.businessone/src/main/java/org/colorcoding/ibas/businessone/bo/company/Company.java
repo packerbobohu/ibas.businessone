@@ -180,6 +180,38 @@ public class Company extends BusinessObject<Company> implements ICompany {
 	}
 
 	/**
+	 * 属性名称-运行方式
+	 */
+	private static final String PROPERTY_RUNTYPE_NAME = "RunType";
+
+	/**
+	 * 运行方式 属性
+	 */
+	@DbField(name = "RunType", type = DbFieldType.ALPHANUMERIC, table = DB_TABLE_NAME, primaryKey = false)
+	public static final IPropertyInfo<String> PROPERTY_RUNTYPE = registerProperty(PROPERTY_RUNTYPE_NAME, String.class,
+			MY_CLASS);
+
+	/**
+	 * 获取-运行方式
+	 * 
+	 * @return 值
+	 */
+	@XmlElement(name = PROPERTY_RUNTYPE_NAME)
+	public final String getRunType() {
+		return this.getProperty(PROPERTY_RUNTYPE);
+	}
+
+	/**
+	 * 设置-运行方式
+	 * 
+	 * @param value
+	 *            值
+	 */
+	public final void setRunType(String value) {
+		this.setProperty(PROPERTY_RUNTYPE, value);
+	}
+
+	/**
 	 * 属性名称-用户
 	 */
 	private static final String PROPERTY_USER_NAME = "User";

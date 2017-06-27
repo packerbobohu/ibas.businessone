@@ -6,6 +6,7 @@
     <Property Name="Description" Description="描述" DataType="Alphanumeric" DataSubType="Default" EditSize="200" Mapped="Descrp"/>
     <Property Name="Activated" Description="是否启用" DataType="Alphanumeric" DataSubType="Default" EditSize="1" DeclaredType="emYesNo" Mapped="Activated"/>
     <Property Name="Server" Description="服务器" DataType="Alphanumeric" DataSubType="Default" EditSize="200" Mapped="Server"/>
+    <Property Name="RunType" Description="运行方式" DataType="Alphanumeric" DataSubType="Default" EditSize="30" Mapped="RunType"/>
     <Property Name="User" Description="用户" DataType="Alphanumeric" DataSubType="Default" EditSize="30" Mapped="User"/>
     <Property Name="Password" Description="密码" DataType="Alphanumeric" DataSubType="Default" EditSize="60" Mapped="Password"/>
     <Property Name="Address" Description="地址" DataType="Alphanumeric" DataSubType="Default" EditSize="300" Mapped="Address"/>

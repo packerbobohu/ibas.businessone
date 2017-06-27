@@ -15,7 +15,8 @@ import org.colorcoding.ibas.businessone.bo.company.Company;
 import org.colorcoding.ibas.businessone.bo.company.ICompany;
 import org.colorcoding.ibas.businessone.bo.user.IUser;
 import org.colorcoding.ibas.businessone.bo.user.User;
-import org.colorcoding.ibas.businessone.util.Encrypt;
+import org.colorcoding.ibas.businessone.runner.IRunner;
+import org.colorcoding.ibas.businessone.runner.RunnerFactory;
 import org.colorcoding.ibas.initialfantasy.repository.BORepositoryInitialFantasy;
 
 /**
@@ -129,8 +130,8 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			if (opRsltUser.getError() != null) {
 				throw opRsltUser.getError();
 			}
-			User userCompany = opRsltUser.getResultObjects().firstOrDefault();
-			if (userCompany == null) {
+			User userMapping = opRsltUser.getResultObjects().firstOrDefault();
+			if (userMapping == null) {
 				throw new Exception(i18n.prop("msg_b1_user_no_company_available",
 						user.getName() != null && !user.getName().isEmpty() ? user.getName() : user.getCode()));
 			}
@@ -138,7 +139,7 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			criteria = new Criteria();
 			condition = criteria.getConditions().create();
 			condition.setAlias(Company.PROPERTY_NAME.getName());
-			condition.setValue(userCompany.getCompany());
+			condition.setValue(userMapping.getCompany());
 			condition = criteria.getConditions().create();
 			condition.setAlias(Company.PROPERTY_ACTIVATED.getName());
 			condition.setValue(emYesNo.YES);
@@ -148,30 +149,12 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			}
 			Company mCompany = opRsltCompany.getResultObjects().firstOrDefault();
 			if (mCompany == null) {
-				throw new Exception(i18n.prop("msg_b1_company_unavailable", userCompany.getCompany()));
+				throw new Exception(i18n.prop("msg_b1_company_unavailable", userMapping.getCompany()));
 			}
-			Encrypt encrypt = new Encrypt();
-			String key = encrypt.random(32);
-			StringBuilder address = new StringBuilder();
-			// 服务地址
-			address.append(mCompany.getServer());
-			address.append("?");
-			// 账号
-			address.append("a1=");
-			address.append(encrypt.encrypt(userCompany.getMappedUser(), key));
-			// 密码
-			address.append("&");
-			address.append("c3=");
-			address.append(encrypt.encrypt(userCompany.getPassword(), key));
-			// 客户端地址
-			address.append("&");
-			address.append("d4=");
-			address.append(encrypt.encrypt(mCompany.getAddress(), key));
-			// 钥匙
-			address.append("&");
-			address.append("pa=");
-			address.append(key);
-			opRslt.addResultObjects(new KeyText(MyConsts.PARAMETER_NAME_COMPANY_URL, address.toString()));
+			IRunner runner = RunnerFactory.create().createRunner();
+			runner.setCompany(mCompany);
+			runner.setUser(userMapping);
+			opRslt.addResultObjects(new KeyText(MyConsts.PARAMETER_NAME_COMPANY_URL, runner.url()));
 		} catch (Exception e) {
 			opRslt.setError(e);
 		}
