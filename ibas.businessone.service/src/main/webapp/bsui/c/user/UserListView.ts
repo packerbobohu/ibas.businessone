@@ -222,4 +222,8 @@ export class UserListView extends ibas.BOListView implements IUserListView {
             this.table.setModel(null);
         }
     }
+    /** 获取选择的数据 */
+    getSelecteds(): bo.User[] {
+        return utils.getTableSelecteds<bo.User>(this.table);
+    }
 }

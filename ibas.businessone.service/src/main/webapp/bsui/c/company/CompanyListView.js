@@ -164,6 +164,9 @@ define(["require", "exports", "ibas/index", "openui5/typings/ibas.utils", "../..
                 this.table.setModel(null);
             }
         }
+        getSelecteds() {
+            return ibas_utils_1.utils.getTableSelecteds(this.table);
+        }
     }
     exports.CompanyListView = CompanyListView;
 });

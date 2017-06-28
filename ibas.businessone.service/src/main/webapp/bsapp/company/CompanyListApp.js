@@ -1,4 +1,4 @@
-define(["require", "exports", "ibas/index", "../../borep/bo/index", "../../borep/BORepositories", "./CompanyViewApp", "./CompanyEditApp"], function (require, exports, ibas, bo, BORepositories_1, CompanyViewApp_1, CompanyEditApp_1) {
+define(["require", "exports", "ibas/index", "../../borep/bo/index", "../../borep/BORepositories", "../../borep/DataConverters", "./CompanyViewApp", "./CompanyEditApp"], function (require, exports, ibas, bo, BORepositories_1, DataConverters_1, CompanyViewApp_1, CompanyEditApp_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class CompanyListApp extends ibas.BOListApplication {
@@ -126,7 +126,12 @@ define(["require", "exports", "ibas/index", "../../borep/bo/index", "../../borep
             });
         }
         getServiceProxies() {
-            return [];
+            return [
+                new ibas.BOListServiceProxy({
+                    data: this.view.getSelecteds(),
+                    converter: new DataConverters_1.DataConverter4b1(),
+                })
+            ];
         }
     }
     CompanyListApp.APPLICATION_ID = "7d461fcc-b0ca-4e29-8c31-0900fe9609a9";

@@ -214,4 +214,8 @@ export class CompanyListView extends ibas.BOListView implements ICompanyListView
             this.table.setModel(null);
         }
     }
+    /** 获取选择的数据 */
+    getSelecteds(): bo.Company[] {
+        return utils.getTableSelecteds<bo.Company>(this.table);
+    }
 }

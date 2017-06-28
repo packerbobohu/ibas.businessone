@@ -1,4 +1,4 @@
-define(["require", "exports", "ibas/index", "../../borep/bo/index", "../../borep/BORepositories", "./UserViewApp", "./UserEditApp"], function (require, exports, ibas, bo, BORepositories_1, UserViewApp_1, UserEditApp_1) {
+define(["require", "exports", "ibas/index", "../../borep/bo/index", "../../borep/BORepositories", "../../borep/DataConverters", "./UserViewApp", "./UserEditApp"], function (require, exports, ibas, bo, BORepositories_1, DataConverters_1, UserViewApp_1, UserEditApp_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class UserListApp extends ibas.BOListApplication {
@@ -126,7 +126,12 @@ define(["require", "exports", "ibas/index", "../../borep/bo/index", "../../borep
             });
         }
         getServiceProxies() {
-            return [];
+            return [
+                new ibas.BOListServiceProxy({
+                    data: this.view.getSelecteds(),
+                    converter: new DataConverters_1.DataConverter4b1(),
+                })
+            ];
         }
     }
     UserListApp.APPLICATION_ID = "8470e426-fb90-4c4f-a542-ac109826b2fd";

@@ -9,6 +9,7 @@
 import * as ibas from "ibas/index";
 import * as bo from "../../borep/bo/index";
 import { BORepositoryBusinessOne } from "../../borep/BORepositories";
+import { DataConverter4b1 } from "../../borep/DataConverters";
 import { UserViewApp } from "./UserViewApp";
 import { UserEditApp } from "./UserEditApp";
 
@@ -106,8 +107,8 @@ export class UserListApp extends ibas.BOListApplication<IUserListView, bo.User> 
             ));
             return;
         }
-        let beDeleteds:ibas.ArrayList<bo.User> = new ibas.ArrayList<bo.User>();
-        if (data instanceof Array ) {
+        let beDeleteds: ibas.ArrayList<bo.User> = new ibas.ArrayList<bo.User>();
+        if (data instanceof Array) {
             for (let item of data) {
                 if (ibas.objects.instanceOf(item, bo.User)) {
                     item.delete();
@@ -129,7 +130,7 @@ export class UserListApp extends ibas.BOListApplication<IUserListView, bo.User> 
                 if (action === ibas.emMessageAction.YES) {
                     try {
                         let boRepository: BORepositoryBusinessOne = new BORepositoryBusinessOne();
-                        let saveMethod: Function = function(beSaved: bo.User):void {
+                        let saveMethod: Function = function (beSaved: bo.User): void {
                             boRepository.saveUser({
                                 beSaved: beSaved,
                                 onCompleted(opRslt: ibas.IOperationResult<bo.User>): void {
@@ -145,7 +146,7 @@ export class UserListApp extends ibas.BOListApplication<IUserListView, bo.User> 
                                             // 处理完成
                                             that.busy(false);
                                             that.messages(ibas.emMessageType.SUCCESS,
-                                            ibas.i18n.prop("sys_shell_data_delete") + ibas.i18n.prop("sys_shell_sucessful"));
+                                                ibas.i18n.prop("sys_shell_data_delete") + ibas.i18n.prop("sys_shell_sucessful"));
                                         }
                                     } catch (error) {
                                         that.messages(ibas.emMessageType.ERROR,
@@ -168,7 +169,12 @@ export class UserListApp extends ibas.BOListApplication<IUserListView, bo.User> 
     }
     /** 获取服务的契约 */
     protected getServiceProxies(): ibas.IServiceProxy<ibas.IServiceContract>[] {
-        return [];
+        return [
+            new ibas.BOListServiceProxy({
+                data: this.view.getSelecteds(),
+                converter: new DataConverter4b1(),
+            })
+        ];
     }
 }
 /** 视图-用户 */
@@ -179,4 +185,6 @@ export interface IUserListView extends ibas.IBOListView {
     deleteDataEvent: Function;
     /** 显示数据 */
     showData(datas: bo.User[]): void;
+    /** 获取选择的数据 */
+    getSelecteds(): bo.User[];
 }
