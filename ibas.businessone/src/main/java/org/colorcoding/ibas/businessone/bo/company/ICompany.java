@@ -3,6 +3,7 @@ package org.colorcoding.ibas.businessone.bo.company;
 import org.colorcoding.ibas.bobas.bo.IBOSimple;
 import org.colorcoding.ibas.bobas.data.DateTime;
 import org.colorcoding.ibas.bobas.data.emYesNo;
+import org.colorcoding.ibas.businessone.data.emRunType;
 
 /**
  * 公司 接口
@@ -75,7 +76,7 @@ public interface ICompany extends IBOSimple {
 	 * 
 	 * @return 值
 	 */
-	String getRunType();
+	emRunType getRunType();
 
 	/**
 	 * 设置-运行方式
@@ -83,7 +84,7 @@ public interface ICompany extends IBOSimple {
 	 * @param value
 	 *            值
 	 */
-	void setRunType(String value);
+	void setRunType(emRunType value);
 
 	/**
 	 * 获取-用户

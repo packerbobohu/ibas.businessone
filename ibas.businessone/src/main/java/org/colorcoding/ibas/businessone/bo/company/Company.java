@@ -14,6 +14,7 @@ import org.colorcoding.ibas.bobas.mapping.BOCode;
 import org.colorcoding.ibas.bobas.mapping.DbField;
 import org.colorcoding.ibas.bobas.mapping.DbFieldType;
 import org.colorcoding.ibas.businessone.MyConsts;
+import org.colorcoding.ibas.businessone.data.emRunType;
 import org.colorcoding.ibas.initialfantasy.MyConfiguration;
 
 /**
@@ -188,8 +189,8 @@ public class Company extends BusinessObject<Company> implements ICompany {
 	 * 运行方式 属性
 	 */
 	@DbField(name = "RunType", type = DbFieldType.ALPHANUMERIC, table = DB_TABLE_NAME, primaryKey = false)
-	public static final IPropertyInfo<String> PROPERTY_RUNTYPE = registerProperty(PROPERTY_RUNTYPE_NAME, String.class,
-			MY_CLASS);
+	public static final IPropertyInfo<emRunType> PROPERTY_RUNTYPE = registerProperty(PROPERTY_RUNTYPE_NAME,
+			emRunType.class, MY_CLASS);
 
 	/**
 	 * 获取-运行方式
@@ -197,7 +198,7 @@ public class Company extends BusinessObject<Company> implements ICompany {
 	 * @return 值
 	 */
 	@XmlElement(name = PROPERTY_RUNTYPE_NAME)
-	public final String getRunType() {
+	public final emRunType getRunType() {
 		return this.getProperty(PROPERTY_RUNTYPE);
 	}
 
@@ -207,7 +208,7 @@ public class Company extends BusinessObject<Company> implements ICompany {
 	 * @param value
 	 *            值
 	 */
-	public final void setRunType(String value) {
+	public final void setRunType(emRunType value) {
 		this.setProperty(PROPERTY_RUNTYPE, value);
 	}
 

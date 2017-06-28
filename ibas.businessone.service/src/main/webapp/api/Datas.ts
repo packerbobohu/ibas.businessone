@@ -16,3 +16,9 @@ export const BO_REPOSITORY_BUSINESSONE: string = "BORepositoryBusinessOne";
 export const BO_CODE_COMPANY: string = "${Company}_B1_COMPANY";
 /** 业务对象编码-用户 */
 export const BO_CODE_USER: string = "${Company}_B1_USER";
+
+/** 运行方式 */
+export enum emRunType {
+    /** 默认 */
+    DEFAULT,
+}

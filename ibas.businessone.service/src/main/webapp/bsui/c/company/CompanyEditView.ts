@@ -8,6 +8,7 @@
 
 import * as ibas from "ibas/index";
 import { utils } from "openui5/typings/ibas.utils";
+import { emRunType } from "../../../api/index";
 import * as bo from "../../../borep/bo/index";
 import { ICompanyEditView } from "../../../bsapp/company/index";
 
@@ -49,6 +50,13 @@ export class CompanyEditView extends ibas.BOEditView implements ICompanyEditView
                 new sap.m.Input("", {
                 }).bindProperty("value", {
                     path: "/server"
+                }),
+                new sap.m.Label("", { text: ibas.i18n.prop("bo_company_runtype") }),
+                new sap.m.Select("", {
+                    items: utils.createComboBoxItems(emRunType)
+                }).bindProperty("selectedKey", {
+                    path: "/runType",
+                    type: "sap.ui.model.type.Integer"
                 }),
                 /*
                 new sap.m.Label("", { text: ibas.i18n.prop("bo_company_user") }),

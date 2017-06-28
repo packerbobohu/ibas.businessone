@@ -19,5 +19,6 @@
   "businessoneusers_icon": "sap-icon://crm-sales",
   "businessoneusers_not_provided_company": "没用提供查看的公司",
   "businessoneusers_company_invalid": "公司[{0}]无效",
+  "businessoneusers_company_loading": "正在加载公司[{0}]，请稍后",
   "businessone_closing_delimiter": "----结束----"
 }

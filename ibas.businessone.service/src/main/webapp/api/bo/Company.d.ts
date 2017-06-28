@@ -21,7 +21,7 @@ import {
     IBOSimpleLine
 } from "ibas/index";
 import {
-
+    emRunType
 } from "../Datas";
 
 /** 公司 */
@@ -38,6 +38,9 @@ export interface ICompany extends IBOSimple {
 
     /** 服务器 */
     server: string;
+
+    /** 运行方式 */
+    runType: emRunType
 
     /** 用户 */
     user: string;

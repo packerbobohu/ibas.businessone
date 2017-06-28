@@ -130,8 +130,8 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			if (opRsltUser.getError() != null) {
 				throw opRsltUser.getError();
 			}
-			User userMapping = opRsltUser.getResultObjects().firstOrDefault();
-			if (userMapping == null) {
+			User mUser = opRsltUser.getResultObjects().firstOrDefault();
+			if (mUser == null) {
 				throw new Exception(i18n.prop("msg_b1_user_no_company_available",
 						user.getName() != null && !user.getName().isEmpty() ? user.getName() : user.getCode()));
 			}
@@ -139,7 +139,7 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			criteria = new Criteria();
 			condition = criteria.getConditions().create();
 			condition.setAlias(Company.PROPERTY_NAME.getName());
-			condition.setValue(userMapping.getCompany());
+			condition.setValue(mUser.getCompany());
 			condition = criteria.getConditions().create();
 			condition.setAlias(Company.PROPERTY_ACTIVATED.getName());
 			condition.setValue(emYesNo.YES);
@@ -149,11 +149,11 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			}
 			Company mCompany = opRsltCompany.getResultObjects().firstOrDefault();
 			if (mCompany == null) {
-				throw new Exception(i18n.prop("msg_b1_company_unavailable", userMapping.getCompany()));
+				throw new Exception(i18n.prop("msg_b1_company_unavailable", mUser.getCompany()));
 			}
-			IRunner runner = RunnerFactory.create().createRunner();
+			IRunner runner = RunnerFactory.create().create(mCompany.getRunType());
 			runner.setCompany(mCompany);
-			runner.setUser(userMapping);
+			runner.setUser(mUser);
 			opRslt.addResultObjects(new KeyText(MyConsts.PARAMETER_NAME_COMPANY_URL, runner.url()));
 		} catch (Exception e) {
 			opRslt.setError(e);

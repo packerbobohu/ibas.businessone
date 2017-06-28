@@ -29,6 +29,12 @@ define(["require", "exports", "ibas/index", "../../api/index"], function (requir
         set server(value) {
             this.setProperty(Company.PROPERTY_SERVER_NAME, value);
         }
+        get runType() {
+            return this.getProperty(Company.PROPERTY_RUNTYPE_NAME);
+        }
+        set runType(value) {
+            this.setProperty(Company.PROPERTY_RUNTYPE_NAME, value);
+        }
         get user() {
             return this.getProperty(Company.PROPERTY_USER_NAME);
         }
@@ -152,6 +158,7 @@ define(["require", "exports", "ibas/index", "../../api/index"], function (requir
     Company.PROPERTY_DESCRIPTION_NAME = "Description";
     Company.PROPERTY_ACTIVATED_NAME = "Activated";
     Company.PROPERTY_SERVER_NAME = "Server";
+    Company.PROPERTY_RUNTYPE_NAME = "RunType";
     Company.PROPERTY_USER_NAME = "User";
     Company.PROPERTY_PASSWORD_NAME = "Password";
     Company.PROPERTY_ADDRESS_NAME = "Address";

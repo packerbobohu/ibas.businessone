@@ -24,6 +24,7 @@ import {
 import {
     ICompany,
     BO_CODE_COMPANY,
+    emRunType,
 } from "../../api/index";
 
 /** 公司 */
@@ -77,6 +78,17 @@ export class Company extends BOSimple<Company> implements ICompany {
     /** 设置-服务器 */
     set server(value: string) {
         this.setProperty(Company.PROPERTY_SERVER_NAME, value);
+    }
+
+    /** 映射的属性名称-运行方式 */
+    static PROPERTY_RUNTYPE_NAME: string = "RunType";
+    /** 获取-运行方式 */
+    get runType(): emRunType {
+        return this.getProperty<emRunType>(Company.PROPERTY_RUNTYPE_NAME);
+    }
+    /** 设置-运行方式 */
+    set runType(value: emRunType) {
+        this.setProperty(Company.PROPERTY_RUNTYPE_NAME, value);
     }
 
     /** 映射的属性名称-用户 */

@@ -1,8 +1,13 @@
 package org.colorcoding.ibas.businessone.runner;
 
-import org.colorcoding.ibas.businessone.bo.company.ICompany;
-import org.colorcoding.ibas.businessone.bo.user.IUser;
+import org.colorcoding.ibas.businessone.data.emRunType;
 
+/**
+ * 运行者工厂
+ * 
+ * @author Niuren.Zhu
+ *
+ */
 public class RunnerFactory {
 
 	private static RunnerFactory instance;
@@ -18,40 +23,9 @@ public class RunnerFactory {
 		return instance;
 	}
 
-	public IRunner createRunner() {
+	public IRunner create(emRunType type) {
 
-		return new IRunner() {
-
-			@Override
-			public String url() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void setUser(IUser user) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void setCompany(ICompany company) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public IUser getUser() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public ICompany getCompany() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		return new Runner();
 	}
 
 }

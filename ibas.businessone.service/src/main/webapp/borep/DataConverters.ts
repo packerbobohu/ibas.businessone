@@ -9,6 +9,7 @@
 import * as ibas from "ibas/index";
 import * as bo from "./bo/index";
 import {
+    emRunType
 } from "../api/index";
 
 /** 数据转换者 */
@@ -58,6 +59,11 @@ class BOConverter4b1 extends ibas.BOConverter {
      * @returns 转换的值
      */
     protected convertData(boName: string, property: string, value: any): any {
+        if (boName === bo.Company.name) {
+            if (property === bo.Company.PROPERTY_RUNTYPE_NAME) {
+                return ibas.enums.toString(emRunType, value);
+            }
+        }
         return super.convertData(boName, property, value);
     }
 
@@ -69,6 +75,11 @@ class BOConverter4b1 extends ibas.BOConverter {
      * @returns 解析的值
      */
     protected parsingData(boName: string, property: string, value: any): any {
+        if (boName === bo.Company.name) {
+            if (property === bo.Company.PROPERTY_RUNTYPE_NAME) {
+                return ibas.enums.valueOf(emRunType, value);
+            }
+        }
         return super.parsingData(boName, property, value);
     }
 }

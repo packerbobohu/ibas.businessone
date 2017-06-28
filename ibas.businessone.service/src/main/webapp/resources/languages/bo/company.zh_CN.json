@@ -4,6 +4,7 @@
   "bo_company_description": "描述",
   "bo_company_activated": "是否启用",
   "bo_company_server": "服务器",
+  "bo_company_runtype": "运行方式",
   "bo_company_user": "用户",
   "bo_company_password": "密码",
   "bo_company_address": "地址",

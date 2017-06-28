@@ -50,19 +50,21 @@ export class UserCompanyViewApp extends ibas.Application<IUserCompanyViewView> {
                             throw new Error(opRslt.message);
                         }
                         let address: ibas.KeyText = opRslt.resultObjects.firstOrDefault((item: ibas.KeyText) => {
-                            return item.key === PARAMETER_NAME_COMPANY_ADDRESS;
+                            return item.key === PARAMETER_NAME_COMPANY_URL;
                         });
                         if (ibas.objects.isNull(address)) {
                             throw new Error(ibas.i18n.prop("businessoneusers_company_invalid", that.company));
                         }
                         that.view.url = address.text;
                         that.view.isInside = ibas.config.get(CONFIG_ITEM_B1_OPEN_INSIDE, true);
+                        ibas.logger.log(ibas.emMessageLevel.DEBUG, "company: {0}", address.text);
                         that.show();
                     } catch (error) {
                         that.messages(error);
                     }
                 }
             });
+            this.proceeding(ibas.emMessageType.INFORMATION, ibas.i18n.prop("businessoneusers_company_loading", this.company));
         }
     }
     /** 公司 */

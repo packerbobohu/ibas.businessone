@@ -1,4 +1,4 @@
-define(["require", "exports", "ibas/index", "openui5/typings/ibas.utils"], function (require, exports, ibas, ibas_utils_1) {
+define(["require", "exports", "ibas/index", "openui5/typings/ibas.utils", "../../../api/index"], function (require, exports, ibas, ibas_utils_1, index_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class CompanyEditView extends ibas.BOEditView {
@@ -29,6 +29,13 @@ define(["require", "exports", "ibas/index", "openui5/typings/ibas.utils"], funct
                     new sap.m.Label("", { text: ibas.i18n.prop("bo_company_server") }),
                     new sap.m.Input("", {}).bindProperty("value", {
                         path: "/server"
+                    }),
+                    new sap.m.Label("", { text: ibas.i18n.prop("bo_company_runtype") }),
+                    new sap.m.Select("", {
+                        items: ibas_utils_1.utils.createComboBoxItems(index_1.emRunType)
+                    }).bindProperty("selectedKey", {
+                        path: "/runType",
+                        type: "sap.ui.model.type.Integer"
                     }),
                     new sap.m.Label("", { text: ibas.i18n.prop("bo_company_address") }),
                     new sap.m.Input("", {}).bindProperty("value", {
