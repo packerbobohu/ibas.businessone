@@ -1,7 +1,6 @@
 package org.colorcoding.ibas.businessone.repository;
 
 import org.colorcoding.ibas.bobas.common.ICriteria;
-import org.colorcoding.ibas.bobas.common.IOperationResult;
 import org.colorcoding.ibas.bobas.common.OperationResult;
 import org.colorcoding.ibas.bobas.data.KeyText;
 import org.colorcoding.ibas.bobas.repository.IBORepositorySmartService;
@@ -29,7 +28,7 @@ public interface IBORepositoryBusinessOneSvc extends IBORepositorySmartService {
 	 *            公司
 	 * @return 操作结果
 	 */
-	IOperationResult<KeyText> runUserCompany(String company, String token);
+	OperationResult<KeyText> runUserCompany(String company, String token);
 
 	// --------------------------------------------------------------------------------------------//
 	/**
