@@ -10,7 +10,7 @@ import org.colorcoding.ibas.bobas.data.emYesNo;
 import org.colorcoding.ibas.bobas.i18n.i18n;
 import org.colorcoding.ibas.bobas.ownership.PermissionGroup;
 import org.colorcoding.ibas.bobas.repository.BORepositoryServiceApplication;
-import org.colorcoding.ibas.businessone.MyConsts;
+import org.colorcoding.ibas.businessone.MyConfiguration;
 import org.colorcoding.ibas.businessone.bo.company.Company;
 import org.colorcoding.ibas.businessone.bo.company.ICompany;
 import org.colorcoding.ibas.businessone.bo.user.IUser;
@@ -154,7 +154,7 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			IRunner runner = RunnerFactory.create().create(mCompany.getRunType());
 			runner.setCompany(mCompany);
 			runner.setUser(mUser);
-			opRslt.addResultObjects(new KeyText(MyConsts.PARAMETER_NAME_COMPANY_URL, runner.url()));
+			opRslt.addResultObjects(new KeyText(MyConfiguration.PARAMETER_NAME_COMPANY_URL, runner.url()));
 		} catch (Exception e) {
 			opRslt.setError(e);
 		}
