@@ -7,8 +7,7 @@ import org.colorcoding.ibas.bobas.common.IOperationResult;
 import org.colorcoding.ibas.bobas.common.OperationResult;
 import org.colorcoding.ibas.bobas.data.KeyText;
 import org.colorcoding.ibas.bobas.data.emYesNo;
-import org.colorcoding.ibas.bobas.i18n.i18n;
-import org.colorcoding.ibas.bobas.ownership.PermissionGroup;
+import org.colorcoding.ibas.bobas.i18n.I18N;
 import org.colorcoding.ibas.bobas.repository.BORepositoryServiceApplication;
 import org.colorcoding.ibas.businessone.MyConfiguration;
 import org.colorcoding.ibas.businessone.bo.company.Company;
@@ -22,7 +21,6 @@ import org.colorcoding.ibas.initialfantasy.repository.BORepositoryInitialFantasy
 /**
  * BusinessOne仓库
  */
-@PermissionGroup("BusinessOne")
 public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 		implements IBORepositoryBusinessOneSvc, IBORepositoryBusinessOneApp {
 
@@ -113,7 +111,7 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			org.colorcoding.ibas.initialfantasy.bo.organizations.User user = opRsltSysUser.getResultObjects()
 					.firstOrDefault();
 			if (user == null) {
-				throw new Exception(i18n.prop("msg_b1_system_user_not_exist"));
+				throw new Exception(I18N.prop("msg_b1_system_user_not_exist"));
 			}
 			// 查询绑定用户
 			criteria = new Criteria();
@@ -132,7 +130,7 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			}
 			User mUser = opRsltUser.getResultObjects().firstOrDefault();
 			if (mUser == null) {
-				throw new Exception(i18n.prop("msg_b1_user_no_company_available",
+				throw new Exception(I18N.prop("msg_b1_user_no_company_available",
 						user.getName() != null && !user.getName().isEmpty() ? user.getName() : user.getCode()));
 			}
 			// 获取公司信息
@@ -149,7 +147,7 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			}
 			Company mCompany = opRsltCompany.getResultObjects().firstOrDefault();
 			if (mCompany == null) {
-				throw new Exception(i18n.prop("msg_b1_company_unavailable", mUser.getCompany()));
+				throw new Exception(I18N.prop("msg_b1_company_unavailable", mUser.getCompany()));
 			}
 			IRunner runner = RunnerFactory.create().create(mCompany.getRunType());
 			runner.setCompany(mCompany);
