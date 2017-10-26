@@ -73,8 +73,9 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			for (ICompany item : opRsltCompany.getResultObjects()) {
 				KeyText keyText = new KeyText();
 				keyText.setKey(item.getName());
-				keyText.setText(item.getDescription() != null && !item.getDescription().isEmpty()
-						? item.getDescription() : item.getName());
+				keyText.setText(
+						item.getDescription() != null && !item.getDescription().isEmpty() ? item.getDescription()
+								: item.getName());
 				opRslt.addResultObjects(keyText);
 			}
 		} catch (Exception e) {
@@ -96,19 +97,19 @@ public class BORepositoryBusinessOne extends BORepositoryServiceApplication
 			// 查询系统用户
 			ICriteria criteria = new Criteria();
 			ICondition condition = criteria.getConditions().create();
-			condition.setAlias(org.colorcoding.ibas.initialfantasy.bo.organizations.User.PROPERTY_DOCENTRY.getName());
+			condition.setAlias(org.colorcoding.ibas.initialfantasy.bo.organization.User.PROPERTY_DOCENTRY.getName());
 			condition.setValue(this.getCurrentUser().getId());
 			condition = criteria.getConditions().create();
-			condition.setAlias(org.colorcoding.ibas.initialfantasy.bo.organizations.User.PROPERTY_ACTIVATED.getName());
+			condition.setAlias(org.colorcoding.ibas.initialfantasy.bo.organization.User.PROPERTY_ACTIVATED.getName());
 			condition.setValue(emYesNo.YES);
 			BORepositoryInitialFantasy ifRepository = new BORepositoryInitialFantasy();
 			ifRepository.setRepository(this.getRepository());
-			IOperationResult<org.colorcoding.ibas.initialfantasy.bo.organizations.User> opRsltSysUser = ifRepository
+			IOperationResult<org.colorcoding.ibas.initialfantasy.bo.organization.User> opRsltSysUser = ifRepository
 					.fetchUser(criteria, token);
 			if (opRsltSysUser.getError() != null) {
 				throw opRsltSysUser.getError();
 			}
-			org.colorcoding.ibas.initialfantasy.bo.organizations.User user = opRsltSysUser.getResultObjects()
+			org.colorcoding.ibas.initialfantasy.bo.organization.User user = opRsltSysUser.getResultObjects()
 					.firstOrDefault();
 			if (user == null) {
 				throw new Exception(I18N.prop("msg_b1_system_user_not_exist"));
