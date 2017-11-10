@@ -7,7 +7,7 @@
  */
 
 import * as ibas from "ibas/index";
-import { utils } from "openui5/typings/ibas.utils";
+import * as openui5 from "openui5/index";
 import { emRunType } from "../../../api/index";
 import * as bo from "../../../borep/bo/index";
 import { ICompanyEditView } from "../../../bsapp/company/index";
@@ -42,7 +42,7 @@ export class CompanyEditView extends ibas.BOEditView implements ICompanyEditView
                 }),
                 new sap.m.Label("", { text: ibas.i18n.prop("bo_company_activated") }),
                 new sap.m.Select("", {
-                    items: utils.createComboBoxItems(ibas.emYesNo)
+                    items: openui5.utils.createComboBoxItems(ibas.emYesNo)
                 }).bindProperty("selectedKey", {
                     path: "/activated",
                     type: "sap.ui.model.type.Integer"
@@ -54,7 +54,7 @@ export class CompanyEditView extends ibas.BOEditView implements ICompanyEditView
                 }),
                 new sap.m.Label("", { text: ibas.i18n.prop("bo_company_runtype") }),
                 new sap.m.Select("", {
-                    items: utils.createComboBoxItems(emRunType)
+                    items: openui5.utils.createComboBoxItems(emRunType)
                 }).bindProperty("selectedKey", {
                     path: "/runType",
                     type: "sap.ui.model.type.Integer"
@@ -166,7 +166,7 @@ export class CompanyEditView extends ibas.BOEditView implements ICompanyEditView
         // 新建时：禁用删除，
         if (data.isNew) {
             if (this.page.getSubHeader() instanceof sap.m.Toolbar) {
-                utils.changeToolbarDeletable(<sap.m.Toolbar>this.page.getSubHeader(), false);
+                openui5.utils.changeToolbarDeletable(<sap.m.Toolbar>this.page.getSubHeader(), false);
             }
         }
     }
@@ -175,7 +175,7 @@ export class CompanyEditView extends ibas.BOEditView implements ICompanyEditView
     showCompany(data: bo.Company): void {
         this.form.setModel(new sap.ui.model.json.JSONModel(data));
         // 监听属性改变，并更新控件
-        utils.refreshModelChanged(this.form, data);
+        openui5.utils.refreshModelChanged(this.form, data);
         // 改变视图状态
         this.changeViewStatus(data);
     }
