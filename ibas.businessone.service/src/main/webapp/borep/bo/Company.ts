@@ -305,6 +305,7 @@ export class Company extends BOSimple<Company> implements ICompany {
     /** 初始化数据 */
     protected init(): void {
         this.objectCode = config.applyVariables(Company.BUSINESS_OBJECT_CODE);
+        this.activated = emYesNo.YES;
     }
 }
 
