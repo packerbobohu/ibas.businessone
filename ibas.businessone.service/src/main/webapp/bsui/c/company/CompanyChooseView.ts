@@ -136,7 +136,7 @@ export class CompanyChooseView extends ibas.BOChooseView implements ICompanyChoo
                 for (let item of datas) {
                     hDatas.rows.push(item);
                 }
-                model.refresh(false);
+                model.refresh(false);                done = true;
 
             }
         }
