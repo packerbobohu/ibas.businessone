@@ -10,7 +10,7 @@ import org.colorcoding.ibas.businessone.data.emRunType;
  */
 public class RunnerFactory {
 
-	private static RunnerFactory instance;
+	private volatile static RunnerFactory instance;
 
 	public static RunnerFactory create() {
 		if (instance == null) {
